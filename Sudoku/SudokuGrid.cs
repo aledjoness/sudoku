@@ -109,17 +109,15 @@ namespace Sudoku
             result.Add(col9);
             grid = result;
             playerGuessGrid = createEmptyGrid();
-            //printGrid();
+            printGrid();
         }
-
-        //public 
 
         public int getValueOfButtonInGrid(string nameOfButton)
         {
             char[] nameSplit = nameOfButton.ToCharArray();
             string row = nameSplit[0].ToString();
             string col = nameSplit[1].ToString();
-            return grid[Int32.Parse(row)][Int32.Parse(col)];
+            return grid[int.Parse(row)][int.Parse(col)];
         }
 
         // Creates a 9x9 grid of 0's
@@ -457,18 +455,6 @@ namespace Sudoku
                     placementOrderBottomRight[8] = list9;
                     break;
             }
-            //placementOrderTopLeft[3] = tempList3;
-
-            //placementOrderTopLeft[0] = tempList;
-            //placementOrderTopLeft[1] = tempList1;
-            //placementOrderTopLeft[2] = tempList2;
-            //placementOrderTopLeft[3] = tempList3;
-            //tempList.CopyTo(placementOrderTopLeft);
-            //tempList[0] = -1;
-
-            //placementOrderTopMiddle[0] = tempList;
-            //placementOrderTopMiddle[1] = tempList1;
-            //placementOrderTopMiddle[2] = tempList2;
         }
 
         private List<int> fillList(int start, int finish)
@@ -605,31 +591,6 @@ namespace Sudoku
             MessageBox.Show(result);
         }
 
-        //private void retry1(int maxGridAttempts, int gridAttempts)
-        //{
-        //    while (maxGridAttempts > 0)
-        //    {
-        //        MessageBox.Show("Failure on grid attempt: " + gridAttempts + "  - Re-attempting");
-        //        resetBoxToCompleteZero(8);
-        //        resetBoxToCompleteZero(7);
-        //        printGrid();
-        //        gridAttempts++;
-        //        popBottomMiddle();
-
-        //        // If we can populate bottom right then we have found a solution, append to text file
-        //        if (popBottomRight())
-        //        {
-        //            MessageBox.Show("Grid Success!");
-        //            appendPuzzleToSaveFile(path, file);
-        //            maxGridAttempts = -1;
-        //        }
-        //        else
-        //        {
-        //            maxGridAttempts--;
-        //        }
-        //    }
-        //}
-
         public void populate(WelcomeWindow ui)
         {
             /* Logic for "else": if we can't make it work in the box we are working on, then we need to edit a previous
@@ -744,7 +705,7 @@ namespace Sudoku
             else
             {
                 ui.completeProgressBar();
-                ui.updateProgressLabel("Failure! Try running again?");
+                ui.updateProgressLabel("[SudokuGrid] Grid failure! Try running again?");
             }
         }
 

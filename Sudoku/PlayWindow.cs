@@ -15,7 +15,7 @@ namespace Sudoku
     {
         private GameControl gameControl;
         private SudokuGrid sudokuGrid;
-        private Object ourLock = new Object();
+        private object ourLock = new object();
         private bool startTimer;
         private bool gameAlive;
         private int gridDifficulty;
@@ -30,9 +30,10 @@ namespace Sudoku
             gameControl.createToolbox(this, 50);
             gameControl.setSelectedToolkitButtonName("toolkit1");
             gameControl.setHighlightNumber(this, 1);
-            //gameControl.showStartingNumbers(difficulty);
+            gameControl.showStartingNumbers(difficulty, sg);
             gridDifficulty = difficulty;
             sudokuGrid = sg;
+            initialToolkitCheck();
             //ProcessThreadCollection currentThreads = Process.GetCurrentProcess().Threads;
 
             //string res = "";
@@ -53,10 +54,30 @@ namespace Sudoku
             //sg.showNumbersToScreen(this, 8);
         }
 
+        // See if we have already placed 9 of one number during startup
+        private void initialToolkitCheck()
+        {
+            string toolkitButtonToLookFor = "";
+            for (int i = 1; i < 10; i++)
+            {
+                toolkitButtonToLookFor = "toolkit" + i;
+
+                if (!gameControl.numberInstanceStillInPlay(i.ToString()))
+                {
+                    // If not still in play, mark it so
+                    Control[] controls = Controls.Find(toolkitButtonToLookFor, true);
+                    Button b = controls[0] as Button;
+                    b.Enabled = false;
+                }
+
+                
+            }
+        }
+
         public void toolkit_Click(object sender, EventArgs e)
         {
             // Set previous selected button to enabled
-            Control[] controls = this.Controls.Find(gameControl.getSelectedToolkitButtonName(), true);
+            Control[] controls = Controls.Find(gameControl.getSelectedToolkitButtonName(), true);
             if (controls.Length == 1)
             {
                 Button b = controls[0] as Button;
@@ -70,7 +91,7 @@ namespace Sudoku
             Button b2 = sender as Button;
             b2.Enabled = false;
             gameControl.setSelectedToolkitButtonName(b2.Name);
-            gameControl.setHighlightNumber(this, Int32.Parse(b2.Name[7].ToString()));
+            gameControl.setHighlightNumber(this, int.Parse(b2.Name[7].ToString()));
             gameControl.highlightOrDehighlightDisabledButtons(b2.Name[7].ToString(), true);
         }
 
@@ -80,7 +101,7 @@ namespace Sudoku
             if (b.Enabled == true)
             {
                 b.Text = num.ToString();
-                b.ForeColor = System.Drawing.Color.SteelBlue;
+                b.ForeColor = Color.SteelBlue;
             }
         }
 
@@ -221,7 +242,7 @@ namespace Sudoku
                 if (lab.InvokeRequired)
                 {
                     WindowActionCallBack d = new WindowActionCallBack(updateTimeLabel);
-                    Invoke(d, new Object[] { });
+                    Invoke(d, new object[] { });
                 }
                 else
                 {

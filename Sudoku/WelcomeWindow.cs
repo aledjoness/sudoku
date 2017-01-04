@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
 using System.IO;
+using System.Configuration;
 
 namespace Sudoku
 {
@@ -17,8 +14,8 @@ namespace Sudoku
         private GameControl gameControl;
         private Stopwatch stopWatch;
         private long stopWatchMillis;
-        private string path = @"C:\Users\a6f3mzz\Documents\Visual Studio 2010\Projects\Sudoku\Sudoku\data\";
-        private string file = "solved_grids.txt";
+        private string path = ConfigurationManager.AppSettings["path"];
+        private string file = ConfigurationManager.AppSettings["file"];
 
         public WelcomeWindow()
         {
@@ -32,11 +29,11 @@ namespace Sudoku
         private int numOfSolvedGrids()
         {
             string fileName = path + "" + file;
-            const Int32 BufferSize = 128;
+            const int BufferSize = 128;
             using (var fileStream = File.OpenRead(fileName))
             using (var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, BufferSize))
             {
-                String line;
+                string line;
                 int numOfLines = 0;
                 while ((line = streamReader.ReadLine()) != null)
                 {
@@ -51,11 +48,11 @@ namespace Sudoku
             List<int> result = new List<int>();
             char[] delimitChars = { ',' };
             string fileName = path + "" + file;
-            const Int32 BufferSize = 128;
+            const int BufferSize = 128;
             using (var fileStream = File.OpenRead(fileName))
             using (var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, BufferSize))
             {
-                String line;
+                string line;
                 int numOfLines = 1;
                 // Iterate over lines until we reach our position in text file
                 while ((line = streamReader.ReadLine()) != null && numOfLines != position)
@@ -65,7 +62,7 @@ namespace Sudoku
                 string[] splitLine = line.Split(delimitChars);
                 for (int i = 0; i < splitLine.Length; i++)
                 {
-                    result.Add(Int32.Parse(splitLine[i]));
+                    result.Add(int.Parse(splitLine[i]));
                 }
                 return result;
             }
@@ -79,8 +76,8 @@ namespace Sudoku
             SudokuGrid sudokuGrid = new SudokuGrid(getPuzzle(puzzlePick));
 
             PlayWindow pw = new PlayWindow(gameControl, sudokuGrid, 0);
-            pw.FormClosed += (s, args) => this.Close();
-            this.Hide();
+            pw.FormClosed += (s, args) => Close();
+            Hide();
             pw.Show();
         }
 
@@ -115,14 +112,14 @@ namespace Sudoku
         private void setTotalLettersGuessedText(string text)
         {
             string labelToFind = "cpuWordLabel";
-            Control[] controls = this.Controls.Find(labelToFind, true);
+            Control[] controls = Controls.Find(labelToFind, true);
             if (controls.Length == 1)
             {
                 Label lab = controls[0] as Label;
                 if (lab.InvokeRequired)
                 {
                     SetTextCallback d = new SetTextCallback(setTotalLettersGuessedText);
-                    Invoke(d, new Object[] { text });
+                    Invoke(d, new object[] { text });
                 }
                 else
                 {
@@ -138,7 +135,7 @@ namespace Sudoku
             if (progressBar.InvokeRequired)
             {
                 PerformProgress d = new PerformProgress(updateProgressBar);
-                Invoke(d, new Object[] { });
+                Invoke(d, new object[] { });
             }
             else
             {
@@ -151,7 +148,7 @@ namespace Sudoku
             if (progressBar.InvokeRequired)
             {
                 PerformProgress d = new PerformProgress(completeProgressBar);
-                Invoke(d, new Object[] { });
+                Invoke(d, new object[] { });
             }
             else
             {
@@ -166,7 +163,7 @@ namespace Sudoku
             if (statusLabel.InvokeRequired)
             {
                 PerformProgressStatus d = new PerformProgressStatus(updateProgressLabel);
-                Invoke(d, new Object[] { text });
+                Invoke(d, new object[] { text });
             }
             else
             {
