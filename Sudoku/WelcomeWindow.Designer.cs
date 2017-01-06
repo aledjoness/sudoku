@@ -35,6 +35,7 @@
             this.statusLabel = new System.Windows.Forms.Label();
             this.mediumButton = new System.Windows.Forms.Button();
             this.hardButton = new System.Windows.Forms.Button();
+            this.leaderboardButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -59,7 +60,7 @@
             // 
             // generatePuzzleButton
             // 
-            this.generatePuzzleButton.Location = new System.Drawing.Point(21, 273);
+            this.generatePuzzleButton.Location = new System.Drawing.Point(21, 360);
             this.generatePuzzleButton.Name = "generatePuzzleButton";
             this.generatePuzzleButton.Size = new System.Drawing.Size(242, 58);
             this.generatePuzzleButton.TabIndex = 2;
@@ -69,7 +70,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(21, 337);
+            this.progressBar.Location = new System.Drawing.Point(21, 424);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(242, 23);
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
@@ -78,7 +79,7 @@
             // statusLabel
             // 
             this.statusLabel.AutoSize = true;
-            this.statusLabel.Location = new System.Drawing.Point(18, 363);
+            this.statusLabel.Location = new System.Drawing.Point(18, 450);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(40, 13);
             this.statusLabel.TabIndex = 4;
@@ -102,11 +103,22 @@
             this.hardButton.Text = "Hard";
             this.hardButton.UseVisualStyleBackColor = true;
             // 
+            // leaderboardButton
+            // 
+            this.leaderboardButton.Location = new System.Drawing.Point(21, 271);
+            this.leaderboardButton.Name = "leaderboardButton";
+            this.leaderboardButton.Size = new System.Drawing.Size(242, 58);
+            this.leaderboardButton.TabIndex = 7;
+            this.leaderboardButton.Text = "Leaderboard";
+            this.leaderboardButton.UseVisualStyleBackColor = true;
+            this.leaderboardButton.Click += new System.EventHandler(this.leaderboardButton_Click);
+            // 
             // WelcomeWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 385);
+            this.ClientSize = new System.Drawing.Size(284, 472);
+            this.Controls.Add(this.leaderboardButton);
             this.Controls.Add(this.hardButton);
             this.Controls.Add(this.mediumButton);
             this.Controls.Add(this.statusLabel);
@@ -115,8 +127,8 @@
             this.Controls.Add(this.easyButton);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(300, 423);
-            this.MinimumSize = new System.Drawing.Size(300, 423);
+            this.MaximumSize = new System.Drawing.Size(300, 510);
+            this.MinimumSize = new System.Drawing.Size(300, 510);
             this.Name = "WelcomeWindow";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -135,5 +147,6 @@
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Button mediumButton;
         private System.Windows.Forms.Button hardButton;
+        private System.Windows.Forms.Button leaderboardButton;
     }
 }

@@ -52,6 +52,18 @@
     <Compile Include="GameControl.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Leaderboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Leaderboard.Designer.cs">
+      <DependentUpon>Leaderboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NameRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NameRequest.Designer.cs">
+      <DependentUpon>NameRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlayWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +79,12 @@
     <Compile Include="WelcomeWindow.Designer.cs">
       <DependentUpon>WelcomeWindow.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Leaderboard.resx">
+      <DependentUpon>Leaderboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NameRequest.resx">
+      <DependentUpon>NameRequest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PlayWindow.resx">
       <DependentUpon>PlayWindow.cs</DependentUpon>
     </EmbeddedResource>

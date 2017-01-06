@@ -109,7 +109,7 @@ namespace Sudoku
             result.Add(col9);
             grid = result;
             playerGuessGrid = createEmptyGrid();
-            printGrid();
+            //printGrid();
         }
 
         public int getValueOfButtonInGrid(string nameOfButton)
@@ -705,7 +705,7 @@ namespace Sudoku
             else
             {
                 ui.completeProgressBar();
-                ui.updateProgressLabel("[SudokuGrid] Grid failure! Try running again?");
+                ui.updateProgressLabel("Grid failure! Try running again?");
             }
         }
 
@@ -1578,6 +1578,7 @@ namespace Sudoku
             res = res.Remove(res.Length - 1);
 
             File.AppendAllText(pathName + "" + fileName, res + Environment.NewLine);
+           
         }
 
         private void resetBoxToCompleteZero(int boxPos)

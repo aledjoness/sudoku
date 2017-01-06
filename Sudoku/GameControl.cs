@@ -157,6 +157,8 @@ namespace Sudoku
                 case 0:
                     {
                         size = rnd.Next(36, 40);
+                        // Below is for testing only
+                        //size = rnd.Next(80, 81);
                         break;
                     }
                 case 1:
@@ -180,7 +182,6 @@ namespace Sudoku
                     int row = rnd.Next(0, 9);
                     int col = rnd.Next(0, 9);
                     string res = row + "" + col;
-                    //MessageBox.Show(res);
 
                     if (!nums.Contains(res))
                     {
@@ -189,25 +190,9 @@ namespace Sudoku
                     }
                 }                
             }
-
-            // Testing - Show the locations to reveal
-            string result = "";
-            for (int i = 0; i < size; i++)
-            {
-                result += nums[i] + " ";
-            }
-            MessageBox.Show(result);
-
-            //playerViewGrid[0][0].Text = "i";
-
-            //nums.Sort((a, b) => a.CompareTo(b));
-
             // Now we get the values at each location, and change playerViewGrid to show these numbers
             for (int i = 0; i < size; i++)
-            {
-                
-                /* SLIGHT ISSUE IN THAT WE ARE REVEALING THE WRONG NUMBERS LOL */
-
+            {                
                 // Val is the value which will be shown
                 string val = sg.getValueOfButtonInGrid(nums[i]).ToString();
                 updateNumberInstance(val);
@@ -217,70 +202,9 @@ namespace Sudoku
                 string col = currentNums[1].ToString();
                 int colAsInt = int.Parse(col);
                 int rowAsInt = int.Parse(row);
-                //MessageBox.Show(rowAsInt + "" + colAsInt);
                 playerViewGrid[rowAsInt][colAsInt].Enabled = false;
                 playerViewGrid[rowAsInt][colAsInt].Text = val;
-
-                //int col = nums[i];
-                //playerViewGrid[nums[0[0]]][val[1]].Enabled = false;
-                //playerViewGrid[val[0]][val[1]].Text = val;
-                //Control[] controls = Controls.Find(nums[i].ToString(), false);
-                //Button b = controls[0] as Button;
-                //b.Text = val.ToString();
-                //b.Enabled = false;
-                //playerViewGrid[val[0],val[1]]
-                //if (playerViewGrid[i]. == "1")
-
             }
-
-            //// Difficulty ranges between 0, 1 and 2
-            //int topRowLim = 0, midRowLim = 0, botRowLim = 0;
-            //int rowLim = 0;
-            //int gridMax = 0;
-            //int currentRowLim = 0;
-            //List<List<int>> buttonsToReveal = new List<List<int>>();
-            //for (int i = 0; i < 9; i++)
-            //{
-            //    for (int j = 0; j < 9; j++)
-            //    {
-            //        buttonsToReveal[i][j] = 0;
-            //    }
-            //}
-            //Random rnd = new Random();
-
-            ///* Easy can have between 3 - 6 in each box (min 13 max 16 per row)
-            // * Medium can have 2 - 5 in each box (min 11 max 14 per row)
-            // * Hard can have 1 - 4 in each box (min 9 max 12 per row) */
-
-            ///* PERHAPS: Try placing a max of a number, randomly throughout grid */
-            //switch (difficulty)
-            //{
-            //    case 0: // easy
-            //        {
-            //            rowLim = rnd.Next(13, 18);
-            //            gridMax = rnd.Next(35, 39); // between 35-38
-            //            break;
-            //        }
-            //    case 1:
-            //        {
-            //            rowLim = rnd.Next(11, 15);
-            //            //gridMax
-            //            break;
-            //        }
-            //    case 2:
-            //        {
-            //            rowLim = rnd.Next(9, 13);
-            //            break;
-            //        }
-            //}
-
-
-            //switch (difficulty)
-            //{
-            //    case 0:
-            //        topRowLim = rnd.Next(13, 17);
-            //        break;
-            //}
         }
 
         public void updateNumberInstance(string number)

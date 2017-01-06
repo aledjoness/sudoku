@@ -12,10 +12,8 @@ namespace Sudoku
     public partial class WelcomeWindow : Form
     {
         private GameControl gameControl;
-        private Stopwatch stopWatch;
-        private long stopWatchMillis;
-        private string path = ConfigurationManager.AppSettings["path"];
-        private string file = ConfigurationManager.AppSettings["file"];
+        private string path = ConfigurationManager.AppSettings["filePath"];
+        private string file = ConfigurationManager.AppSettings["fileName"];
 
         public WelcomeWindow()
         {
@@ -74,11 +72,17 @@ namespace Sudoku
             Random rnd = new Random();
             int puzzlePick = rnd.Next(1, numOfSolvedGrids() + 1);
             SudokuGrid sudokuGrid = new SudokuGrid(getPuzzle(puzzlePick));
-
             PlayWindow pw = new PlayWindow(gameControl, sudokuGrid, 0);
             pw.FormClosed += (s, args) => Close();
             Hide();
             pw.Show();
+        }
+
+        private void leaderboardButton_Click(object sender, EventArgs e)
+        {
+            Leaderboard lb = new Leaderboard(this);
+            lb.Show();
+            Hide();
         }
 
         private void generatePuzzleButton_Click(object sender, EventArgs e)
@@ -87,24 +91,10 @@ namespace Sudoku
             progressBar.Step = 3;
             progressBar.Value = 0;
 
-            //BackgroundWorker bw = new BackgroundWorker();
-            //bw.RunWorkerAsync();
-            //ThreadPool.QueueUserWorkItem(doWork);
-
             Thread t = new Thread(doWork);
             t.IsBackground = true;
             t.Name = "WORK_THREAD";
             t.Start();
-        }
-
-        private void timeCheck()
-        {
-            while (true)
-            {
-                long currentMillis = stopWatch.ElapsedMilliseconds;
-                long difference = currentMillis - stopWatchMillis;
-                long millisToSecons = difference / 1000;
-            }
         }
 
         delegate void SetTextCallback(string text);
@@ -182,6 +172,6 @@ namespace Sudoku
 
             updateProgressBar();
             sg.populate(this);
-        }
+        }        
     }
 }

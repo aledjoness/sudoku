@@ -68,9 +68,7 @@ namespace Sudoku
                     Control[] controls = Controls.Find(toolkitButtonToLookFor, true);
                     Button b = controls[0] as Button;
                     b.Enabled = false;
-                }
-
-                
+                }                
             }
         }
 
@@ -145,16 +143,48 @@ namespace Sudoku
                 // Perform a win-check
                 if (gameControl.checkForPlayerWin())
                 {
+                    // Deal with player winning
                     gameControl.highlightOrDehighlightDisabledButtons(b.Text, false);
                     gameAlive = false;
                     TimeSpan ts = stopWatch.Elapsed;
-                    string finalResult = ts.Minutes + ":" + ts.Seconds;
+                    string secs, mins;
+                    if (ts.Seconds.ToString().Length == 1)
+                    {
+                        secs = "0" + ts.Seconds;
+                    }
+                    else
+                    {
+                        secs = ts.Seconds.ToString();
+                    }
+                    if (ts.Minutes.ToString().Length == 1)
+                    {
+                        mins = "0" + ts.Minutes;
+                    }
+                    else
+                    {
+                        mins = ts.Minutes.ToString();
+                    }
+                    string finalResult = mins + ":" + secs;
+                    int totalSecs = (ts.Minutes * 60) + ts.Seconds;
                     string penaltyEnding = "";
                     int penaltyNum = gameControl.getPlayerPenalty();
                     int finalScore = getFinalScore(ts.Minutes, ts.Seconds, penaltyNum, gridDifficulty);
                     penaltyEnding = (gameControl.getPlayerPenalty() == 1) ? "penalty" : "penalties";
                     MessageBox.Show("Puzzle completed! Done in " + finalResult + " with " + penaltyNum + " " + penaltyEnding +".\n" +
                         "Final score: " + finalScore);
+
+                    // Add score to leaderboard
+                    Leaderboard lb = new Leaderboard();
+                    if (lb.scoreMadeItOntoLeaderboard(finalScore))
+                    {
+                        MessageBox.Show("Congratulations you made it onto the leaderboard!");
+                        NameRequest nr = new NameRequest(lb, gridDifficulty, totalSecs, finalScore);
+                        nr.FormClosed += (s, args) => Close();
+                        Hide();
+                        nr.Show();
+                    }
+
+                    // Show leaderboard
                 }
             }
             // Show the user they got it wrong - give penalty
@@ -190,7 +220,7 @@ namespace Sudoku
             // Determine multiplier based on difficulty
             double difficultyMultiplier = 0;
             double penaltyMultiplier = 0;
-            double initialScore = 100;
+            double initialScore = 200;
             switch (difficulty)
             {
                 case 0: // easy
