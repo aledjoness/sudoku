@@ -34,24 +34,6 @@ namespace Sudoku
             gridDifficulty = difficulty;
             sudokuGrid = sg;
             initialToolkitCheck();
-            //ProcessThreadCollection currentThreads = Process.GetCurrentProcess().Threads;
-
-            //string res = "";
-            //foreach (ProcessThread thread in currentThreads)
-            //{
-            //    res += thread.Id.ToString() + " " + thread.ToString() + "\n"; 
-            //}
-            //MessageBox.Show(res);
-
-            //sg.showNumbersToScreen(this, 0);
-            //sg.showNumbersToScreen(this, 1);
-            //sg.showNumbersToScreen(this, 2);
-            //sg.showNumbersToScreen(this, 3);
-            //sg.showNumbersToScreen(this, 4);
-            //sg.showNumbersToScreen(this, 5);
-            //sg.showNumbersToScreen(this, 6);
-            //sg.showNumbersToScreen(this, 7);
-            //sg.showNumbersToScreen(this, 8);
         }
 
         // See if we have already placed 9 of one number during startup

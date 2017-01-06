@@ -125,7 +125,7 @@ namespace Sudoku
             Label timeLabel = new Label();
             timeLabel.Font = new Font("Microsoft Sans Serif", 8);
             timeLabel.Location = new Point(420, 323);
-            timeLabel.Text = "Time Elapsed: 0";
+            timeLabel.Text = "Time Elapsed: 0:00";
             timeLabel.Name = "timeElapsedLabel";
             stopWatch = new Stopwatch();
             window.Controls.Add(timeLabel);

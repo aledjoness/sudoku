@@ -166,18 +166,18 @@ namespace Sudoku
                         // Must fix inconsistent state
                         mustFixInconsistentState = true;
                     }
-                }
-                if (lineCheck != 10 || mustFixInconsistentState)
-                {
-                    // If we don't get 10 lines (fillers or entries) then we have a corrupted file
-                    MessageBox.Show("The leaderboard file has become inconsistent. Attempting to fix.",
-                                    "Sudoku", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    fixInconsistentState(numOfLines);
-                    MessageBox.Show("Leaderboard is now in a consistent state. Some saved data may have been lost.",
-                                    "Sudoku", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                return numOfLines;
+                }                
             }
+            if (lineCheck != 10 || mustFixInconsistentState)
+            {
+                // If we don't get 10 lines (fillers or entries) then we have a corrupted file
+                MessageBox.Show("The leaderboard file has become inconsistent. Attempting to fix.",
+                                "Sudoku", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                fixInconsistentState(numOfLines);
+                MessageBox.Show("Leaderboard is now in a consistent state. Some saved data may have been lost.",
+                                "Sudoku", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            return numOfLines;
         }
 
         private void fixInconsistentState(int numOfConsistentLines)
